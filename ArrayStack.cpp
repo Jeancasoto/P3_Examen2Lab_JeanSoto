@@ -20,7 +20,8 @@ bool ArrayStack::push(string* dato){
 	bool retVal=false;
 
 	if(availPos==size){
-
+		array[availPos++]=dato;
+		retVal= true;
 		return retVal;
 
 	}else{
