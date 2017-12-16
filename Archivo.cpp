@@ -24,8 +24,6 @@ ostream& operator<<(ostream &os, const string& n)
 
   istream&  operator>>(istream &is, string& n)
 {
-    // char slash = 0;
-    // return os >> n.numera >> slash >> n.denom;
 
     return is;
 }

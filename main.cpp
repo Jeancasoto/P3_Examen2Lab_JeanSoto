@@ -70,26 +70,27 @@ int main(int argc, char const *argv[]){
                 string* archivo=&existente;
                 stack->push(archivo);
                 existente=file->cargarArchivo();
-                std::cout << "El archivo contiene: " << '\n';
+                std::cout << "✒︎ El archivo contiene: " << '\n';
                 cout << existente<<endl;
-                std::cout << "Dispone de 5 oportunidades de edicion al texto" << '\n';
+                std::cout << "☗ Dispone de 5 oportunidades de edicion al texto" << '\n';
                 char res='s';
                 char escribir='s';
                 while(res=='s' || res=='S' || escribir!='s'){
                     existente=file->cargarArchivo();
                     string add;
-                    std::cout << "Ingrese lo que desea agregar al texto" << '\n';
+                    std::cout << "➤ Ingrese lo que desea agregar al texto" << '\n';
                     getline(cin,add);
                     getline(cin,add);
                     existente+=add;
-                    std::cout << "Este seria el nuevo texto: " << '\n';
+                    std::cout << "➤ Este seria el nuevo texto: " << '\n';
                     cout<<existente<<endl;
                     cont++; 
             
-                    std::cout << "Desea escribir en el archivo?" << '\n';
+                    std::cout << "❍ Desea escribir en el archivo ['s'] o deshacer cambios?['x']" << '\n';
                     cin>> escribir;
                     if(escribir=='s'||escribir=='S'){
-                        file->escribirArchivo(existente);
+                        stack->push(archivo);
+                        file->escribirArchivo(stack->pop()->c_str());
                         goto MenuPrincipal;
                     }
                     if(cont>5){
@@ -102,7 +103,40 @@ int main(int argc, char const *argv[]){
                 break;
                 //fin case a
             case  'b':{
+                int cont=0;
+                Stack* stack = new ArrayStack(5);
+                string existente;
+                string* archivo=&existente;
+                stack->push(archivo);
+                existente="";
+                std::cout << "☻ El archivo no contiene nada " << '\n';
+                cout << existente<<endl;
+                std::cout << "☗ Dispone de 5 oportunidades de edicion al texto" << '\n';
+                char res='s';
+                char escribir='s';
+                while(res=='s' || res=='S' || escribir!='s'){
+                    existente="";
+                    string add;
+                    std::cout << "➤ Ingrese lo que desea agregar al texto" << '\n';
+                    getline(cin,add);
+                    getline(cin,add);
+                    existente+=add;
+                    std::cout << "➤ Este seria el nuevo texto: " << '\n';
+                    cout<<existente<<endl;
+                    cont++; 
+            
+                    std::cout << "Desea escribir en el archivo ['s'] o deshacer cambios?['x']" << '\n';
+                    cin>> escribir;
+                    if(escribir=='s'||escribir=='S'){
+                        stack->push(archivo);
+                        file->escribirArchivo(stack->pop()->c_str());
+                        goto MenuPrincipal;
+                    }
+                    if(cont>5){
+                        res='n';
+                    }
 
+            }
             }
                 break;
                 //fin case b
